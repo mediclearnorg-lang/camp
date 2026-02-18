@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوگو پروژکتور | امضای نوری برند شما</title>
+    <meta name="description" content="خرید لوگو پروژکتور تبلیغاتی؛ مدرن‌ترین روش تبلیغات محیطی با طراحی لوکس و ماندگار.">
+    <style>
+        /* --- FONTS & RESET --- */
+        @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css');
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            outline: none;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #050505; /* مشکی خیلی تیره */
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- COLORS & VARS --- */
+        :root {
+            --gold: #D4AF37;
+            --gold-gradient: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            --dark-bg: #0a0a0a;
+            --card-bg: #111111;
+        }
+
+        /* --- UTILS --- */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        .text-gold {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--gold-gradient);
+            color: #000;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6);
+        }
+
+        /* --- HERO SECTION --- */
+        header {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+            padding-top: 60px;
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #ccc;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .hero-image-container {
+            margin: 40px auto;
+            width: 280px;
+            height: 280px;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.2));
+            /* برای تصویر محصول (دستگاه) */
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* --- FEATURES --- */
+        .features {
+            padding: 80px 0;
+            background-color: var(--dark-bg);
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #222;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* --- SHOWCASE --- */
+        .showcase {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .showcase-img-wrapper {
+            position: relative;
+            margin-top: 40px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            border: 1px solid #333;
+        }
+
+        .showcase-img {
+            width: 100%;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .showcase-img:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- CTA SECTION --- */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(0deg, #000, #111);
+            text-align: center;
+        }
+
+        .price-tag {
+            font-size: 2.5rem;
+            color: #fff;
+            margin: 20px 0;
+            font-weight: 800;
+        }
+
+        .price-sub {
+            font-size: 1rem;
+            color: #888;
+            text-decoration: line-through;
+        }
+
+        /* --- ANIMATION ON SCROLL --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- MOBILE TWEAKS --- */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2rem; }
+            .hero-image-container { width: 220px; height: 220px; }
+            .container { width: 88%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container hero-content">
+            <h1 class="hero-title">
+                کسب‌وکار خود را <br>
+                <span class="text-gold">روی ذهن‌ها حک کنید</span>
+            </h1>
+            <p class="hero-subtitle">
+                لوگو پروژکتور هوشمند؛ مدرن‌ترین جایگزین تابلوهای قدیمی.
+                <br>کم‌مصرف، پرقدرت و خیره‌کننده.
+            </p>
+
+            <div class="hero-image-container">
+                <img src="2.png" alt="دستگاه لوگو پروژکتور" class="hero-image">
+            </div>
+
+            <a href="#cta" class="btn">سفارش با تخفیف ویژه</a>
+        </div>
+    </header>
+
+    <section class="features">
+        <div class="container reveal">
+            <h2 style="text-align: center; font-size: 2rem;">چرا این دستگاه؟</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <span class="card-icon">💎</span>
+                    <h3>طراحی لوکس</h3>
+                    <p style="color:#aaa; font-size:0.9rem; margin-top:10px;">
+                        بدنه فلزی مقاوم با طراحی صنعتی مینیمال که به نمای فروشگاه شما کلاس کاری می‌دهد.
+                    </p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">🔆</span>
+                    <h3>دید در شب عالی</h3>
+                    <p style="color:#aaa; font-size:0.9rem; margin-top:10px;">
+                        لنزهای کریستالی با پرتاب نور فوق‌العاده که مشتری را از فاصله دور جذب می‌کند.
+                    </p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">🔄</span>
+                    <h3>نصب آسان</h3>
+                    <p style="color:#aaa; font-size:0.9rem; margin-top:10px;">
+                        قابلیت چرخش و تعویض آسان لوگو. هر زمان بخواهید طرح تبلیغ خود را عوض کنید.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="showcase">
+        <div class="container reveal">
+            <h2 class="text-gold" style="font-size: 2.2rem;">قدرت نور را ببینید</h2>
+            <p style="color: #ccc; margin-top: 10px;">نمونه واقعی اجرا شده در خیابان</p>
+            
+            <div class="showcase-img-wrapper">
+                <img src="2.png" alt="نمونه پروژکتور پالیز" class="showcase-img">
+            </div>
+        </div>
+    </section>
+
+    <section id="cta" class="cta-section">
+        <div class="container reveal">
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px;">آماده درخشش هستید؟</h2>
+            <p style="color: #ccc; max-width: 600px; margin: 0 auto 30px;">
+                این محصول فقط یک لامپ نیست، سرمایه‌گذاری روی پرستیژ کسب‌وکار شماست.
+                ارسال فوری به سراسر کشور + گارانتی تعویض.
+            </p>
+            
+            <div class="price-box">
+                <div class="price-sub">3,500,000 تومان</div>
+                <div class="price-tag text-gold">2,850,000 تومان</div>
+            </div>
+
+            <br>
+            <a href="tel:09195703080" class="btn">📞 تماس و مشاوره رایگان</a>
+            <br><br>
+            <p style="font-size: 0.8rem; color: #555;">پاسخگویی ۲۴ ساعته</p>
+        </div>
+    </section>
+
+    <script>
+        // اسکریپت ساده برای انیمیشن هنگام اسکرول
+        window.addEventListener('scroll', reveal);
+        function reveal(){
+            var reveals = document.querySelectorAll('.reveal');
+            for(var i = 0; i < reveals.length; i++){
+                var windowheight = window.innerHeight;
+                var revealtop = reveals[i].getBoundingClientRect().top;
+                var revealpoint = 150;
+                if(revealtop < windowheight - revealpoint){
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        // اجرا در لود اولیه
+        reveal();
+    </script>
+</body>
+</html>
