@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پروژکتور لوگو | امضای نوری برند</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --gold-glow: #aa771c;
+            --black: #050505;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(212, 175, 55, 0.2);
+            --neon-purple: #bd00ff; /* هماهنگ با رنگ لوگوی تصویر دوم */
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; } /* نشانگر موس اختصاصی */
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: var(--black);
+            color: #fff;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* --- Custom Cursor --- */
+        .cursor-dot, .cursor-outline {
+            position: fixed;
+            top: 0; left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        .cursor-dot { width: 8px; height: 8px; background: var(--gold); }
+        .cursor-outline {
+            width: 40px; height: 40px;
+            border: 1px solid var(--gold);
+            transition: width 0.2s, height 0.2s;
+        }
+
+        /* --- Noise Overlay (Cinematic Feel) --- */
+        .noise {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48ZmlsdGVyIGlkPSJnoiPjxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjY1IiBudW1PY3RhdmVzPSIzIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2cpIiBvcGFjaXR5PSIwLjAzIi8+PC9zdmc+');
+            pointer-events: none;
+            z-index: 900;
+        }
+
+        /* --- Background Ambience --- */
+        .ambient-light {
+            position: fixed;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(189, 0, 255, 0.15), transparent 70%);
+            top: 20%; left: -10%;
+            z-index: -1;
+            filter: blur(80px);
+            animation: floatLight 10s infinite alternate;
+        }
+        .ambient-gold {
+            position: fixed;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1), transparent 70%);
+            bottom: 10%; right: -10%;
+            z-index: -1;
+            filter: blur(80px);
+        }
+
+        @keyframes floatLight { from { transform: translateY(0); } to { transform: translateY(50px); } }
+
+        /* --- Utility Classes --- */
+        .container { width: 88%; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; }
+        .text-gold { color: var(--gold); text-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
+        .flex-center { display: flex; align-items: center; justify-content: center; }
+        
+        /* --- Typography --- */
+        h1 { font-size: clamp(2.5rem, 8vw, 5rem); line-height: 1.1; font-weight: 900; letter-spacing: -2px; margin-bottom: 20px; }
+        p { color: rgba(255,255,255,0.7); font-size: 1.1rem; line-height: 1.8; }
+
+        /* --- HEADER / HERO --- */
+        header { min-height: 100vh; position: relative; display: flex; align-items: center; padding-top: 60px; }
+        
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-img-box {
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .hero-img {
+            width: 100%;
+            max-width: 500px;
+            filter: drop-shadow(0 20px 50px rgba(0,0,0,0.8));
+            transform-style: preserve-3d;
+            animation: levitate 6s ease-in-out infinite;
+            z-index: 2;
+            position: relative;
+        }
+        
+        /* افکت نور پشت دستگاه */
+        .hero-glow {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, var(--gold-glow), transparent 70%);
+            filter: blur(60px);
+            z-index: 1;
+            opacity: 0.6;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border: 1px solid var(--gold);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            background: rgba(212, 175, 55, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        @keyframes levitate {
+            0%, 100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+            50% { transform: translateY(-20px) rotateX(5deg) rotateY(-5deg); }
+        }
+
+        /* --- BUTTONS --- */
+        .btn-glow {
+            position: relative;
+            padding: 18px 45px;
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            overflow: hidden;
+            transition: 0.4s;
+            display: inline-block;
+            margin-top: 30px;
+            border-radius: 5px;
+        }
+        
+        .btn-glow::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-glow:hover {
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+            background: var(--gold);
+            color: #000;
+        }
+        
+        .btn-glow:hover::before { left: 100%; }
+
+        /* --- SCROLLING TEXT --- */
+        .marquee {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 20px 0;
+            background: var(--black);
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
+            opacity: 0.6;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: scroll 20s linear infinite;
+            font-size: 4rem;
+            font-weight: 900;
+            color: transparent;
+            -webkit-text-stroke: 1px #444;
+            text-transform: uppercase;
+        }
+        @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+        /* --- PRODUCT SHOWCASE (Dark Glass) --- */
+        .showcase-section { padding: 100px 0; position: relative; }
+        
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .projection-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border-radius: 30px;
+            overflow: hidden;
+            margin-top: 50px;
+            border: 1px solid #333;
+        }
+
+        .projection-text {
+            padding: 60px;
+            background: linear-gradient(135deg, #111, #050505);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .projection-img-box {
+            position: relative;
+            height: 100%;
+            min-height: 400px;
+            overflow: hidden;
+        }
+
+        .projection-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s ease;
+        }
+
+        .projection-img-box:hover .projection-img { transform: scale(1.1); }
+
+        /* افکت نور افکن روی عکس نمونه کار */
+        .projection-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 30%, transparent 20%, #050505 90%);
+            pointer-events: none;
+        }
+
+        /* --- FEATURES ICONS --- */
+        .feature-row {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 80px;
+            gap: 30px;
+        }
+        .feature-item { text-align: center; width: 150px; }
+        .f-icon { font-size: 2.5rem; color: var(--gold); margin-bottom: 15px; text-shadow: 0 0 20px var(--gold-glow); }
+        .f-text { font-size: 0.9rem; color: #ccc; }
+
+        /* --- STICKY MOBILE CTA --- */
+        .sticky-cta {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            background: rgba(20, 20, 20, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--gold);
+            padding: 15px 25px;
+            border-radius: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: none; /* Desktop hidden */
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 968px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 30px; }
+            .hero-grid > div:nth-child(2) { order: -1; } /* Image first on mobile */
+            .hero-img { max-width: 300px; margin: 0 auto; display: block; }
+            h1 { font-size: 2.8rem; }
+            .projection-grid { grid-template-columns: 1fr; }
+            .sticky-cta { display: flex; }
+            .cursor-dot, .cursor-outline { display: none; } /* Disable custom cursor on touch */
+            .ambient-light, .ambient-gold { opacity: 0.5; }
+            .projection-text { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="noise"></div>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+    <div class="ambient-light"></div>
+    <div class="ambient-gold"></div>
+
+    <header>
+        <div class="container hero-grid">
+            
+            <div data-aos="fade-right">
+                <span class="badge">نسل جدید تبلیغات محیطی</span>
+                <h1>تبدیل دیوار به <br> <span class="text-gold">ماشین پول‌سازی</span></h1>
+                <p>
+                    لوگو پروژکتور هوشمند؛ تنها دستگاهی که نیاز دارید تا نگاه هر عابری را بدزدید. 
+                    طراحی شده برای کسب‌وکارهای لوکس که به پرستیژ اهمیت می‌دهند.
+                </p>
+                <div style="margin-top: 40px;">
+                    <a href="#buy" class="btn-glow">ثبت سفارش خاص</a>
+                </div>
+            </div>
+
+            <div class="hero-img-box">
+                <div class="hero-glow"></div>
+                <img src="image_bd9ef9.png" alt="دستگاه پروژکتور" class="hero-img">
+            </div>
+        </div>
+    </header>
+
+    <div class="marquee">
+        <div class="marquee-content">
+            LUXURY BRANDING • HIGH VISIBILITY • SMART LIGHTING • FUTURE OF ADS • 
+            LUXURY BRANDING • HIGH VISIBILITY • SMART LIGHTING • FUTURE OF ADS •
+        </div>
+    </div>
+
+    <section class="showcase-section">
+        <div class="container">
+            
+            <div class="feature-row">
+                <div class="feature-item">
+                    <i class="fas fa-gem f-icon"></i>
+                    <p class="f-text">بدنه ضدضربه</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-bolt f-icon"></i>
+                    <p class="f-text">کم مصرف (LED)</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-eye f-icon"></i>
+                    <p class="f-text">پرتاب نور ۵۰ متر</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-sync f-icon"></i>
+                    <p class="f-text">چرخش ۳۶۰ درجه</p>
+                </div>
+            </div>
+
+            <div class="projection-grid" id="buy">
+                <div class="projection-img-box">
+                    <img src="image_bd4998.jpg" alt="نمونه کار رستوران" class="projection-img">
+                    <div class="projection-overlay"></div>
+                </div>
+                <div class="projection-text">
+                    <h2 style="font-size: 2rem; margin-bottom: 20px;">قدرت در تاریکی</h2>
+                    <p>
+                        تصویر سمت راست، خروجی واقعی دستگاه ماست. شفافیت رنگ‌ها و وضوح تصویر در شب، مشتریان را میخکوب می‌کند. 
+                        <br><br>
+                        با نصب این دستگاه، پیاده‌رو یا دیوار روبروی فروشگاه شما تبدیل به بیلبورد شخصی شما می‌شود.
+                    </p>
+                    
+                    <div style="margin-top: 40px; border-top: 1px solid #333; padding-top: 20px;">
+                        <span style="font-size: 0.9rem; color: #666;">قیمت جشنواره:</span>
+                        <div style="display: flex; align-items: baseline; gap: 15px; margin-top: 10px;">
+                            <span style="text-decoration: line-through; color: #555; font-size: 1.2rem;">3,500,000</span>
+                            <span class="text-gold" style="font-size: 2rem; font-weight: bold;">2,850,000 <span style="font-size: 1rem;">تومان</span></span>
+                        </div>
+                    </div>
+
+                    <a href="tel:09120000000" class="btn-glow" style="text-align: center; margin-top: 30px;">
+                        <i class="fas fa-phone-alt" style="margin-left: 10px;"></i> مشاوره خرید
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="sticky-cta">
+        <div style="color: #fff; font-weight: bold;">خرید ویژه</div>
+        <a href="tel:09120000000" style="background: var(--gold); color: #000; padding: 8px 20px; border-radius: 20px; text-decoration: none; font-weight: bold;">تماس بگیرید</a>
+    </div>
+
+    <script>
+        // Custom Cursor Logic
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            // تاخیر نرم برای دایره بزرگتر
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        // 3D Tilt Effect for Hero Image
+        const heroContainer = document.querySelector('.hero-grid');
+        const heroImg = document.querySelector('.hero-img');
+
+        heroContainer.addEventListener('mousemove', (e) => {
+            // فقط در دسکتاپ اجرا شود
+            if(window.innerWidth > 968) {
+                let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+                heroImg.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            }
+        });
+        
+        // Reset transform on mouse leave
+        heroContainer.addEventListener('mouseleave', () => {
+            heroImg.style.transform = `rotateY(0deg) rotateX(0deg)`;
+        });
+
+    </script>
+</body>
+</html>
