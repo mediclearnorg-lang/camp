@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>لوگو پروژکتورهای لاکچری ۱۴۰۵</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --gold: #d4af37;
+      --glass-bg: rgba(18, 18, 38, 0.5);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Vazirmatn', sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 15%, #1c1429 0%, #0a0a0f 70%, #000000 100%);
+      color: #f5f5f5;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* افکت شیشه و درخشش */
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    }
+
+    /* انیمیشن پس‌زمینه هیرو */
+    .hero-bg {
+      background: linear-gradient(135deg, #120d22, #0f0a1a);
+      position: relative;
+    }
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 30%, rgba(212,175,55,0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 70%, rgba(193,154,91,0.1) 0%, transparent 60%);
+      animation: glowPulse 12s infinite alternate ease-in-out;
+      pointer-events: none;
+    }
+    @keyframes glowPulse {
+      0% { opacity: 0.6; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.05); }
+    }
+
+    /* متن طلایی */
+    .title-gold {
+      background: linear-gradient(90deg, #e8d18c, #d4af37, #f0e0a8, #d4af37);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 40px rgba(212,175,55,0.4);
+      font-weight: 900;
+    }
+
+    /* افکت براق روی کارت محصول */
+    .product-card {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: -150%;
+      left: -50%;
+      width: 40%;
+      height: 300%;
+      background: linear-gradient(135deg, transparent, rgba(255,245,220,0.3), transparent);
+      transform: skewX(-35deg);
+      transition: all 0.8s;
+      opacity: 0;
+      z-index: 10;
+    }
+    .product-card:hover::before {
+      opacity: 1;
+      top: -20%;
+      left: 120%;
+    }
+    .product-card:hover {
+      transform: translateY(-15px) scale(1.03);
+      border-color: #f0e0a8;
+      box-shadow: 0 40px 70px -15px rgba(212,175,55,0.3);
+    }
+
+    .product-img {
+      transition: transform 0.8s ease;
+    }
+    .product-card:hover .product-img {
+      transform: scale(1.12) rotate(2deg);
+    }
+
+    .price-value {
+      font-family: 'Vazirmatn', sans-serif;
+      background: linear-gradient(90deg, #f0e0a8, #d4af37, #f0e0a8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 800;
+      font-size: 1.7rem;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-amber-500/30">
+    <div class="max-w-7xl mx-auto px-5 py-4 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3 text-amber-400">
+        <i class="fa-solid fa-phone-volume text-xl animate-pulse"></i>
+        <a href="tel:09195703080" class="text-xl font-black tracking-tighter">۰۹۱۹۵۷۰۳۰۸۰</a>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="https://wa.me/989195703080" class="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 px-6 py-2.5 rounded-full text-white font-bold transition-all shadow-lg shadow-emerald-900/40">
+          <i class="fa-brands fa-whatsapp text-2xl"></i>
+          <span>واتساپ</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero-bg pt-44 pb-28 text-center px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="title-gold text-5xl sm:text-7xl md:text-8xl leading-tight mb-8">
+        لوگو پروژکتورهای<br>لاکچری
+      </h1>
+      <p class="text-xl sm:text-2xl text-zinc-300 font-light max-w-2xl mx-auto">
+        نورپردازی حرفه‌ای • طراحی بی‌نظیر • کیفیت استثنایی
+      </p>
+      <div class="mt-12">
+        <button onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})" class="bg-gradient-to-r from-amber-500 to-yellow-400 text-black font-black text-xl px-12 py-5 rounded-full hover:scale-110 transition-transform shadow-2xl shadow-amber-500/20">
+          مشاهده کاتالوگ <i class="fa-solid fa-arrow-down mr-2"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section id="products" class="max-w-7xl mx-auto px-5 py-24">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
+
+      <div class="product-card glass rounded-3xl overflow-hidden">
+        <div class="h-64 bg-zinc-950/80 flex items-center justify-center p-8">
+          <img src="images/p1.png" alt="پروژکتور" class="product-img max-h-full object-contain">
+        </div>
+        <div class="p-8 text-center border-t border-amber-500/10">
+          <h3 class="text-white text-xl font-bold mb-4 h-14">لوگو پروژکتور ۱۲۰۰ وات</h3>
+          <div class="price-value">۱۴۴,۰۰۰,۰۰۰</div>
+          <span class="text-amber-500 text-sm mt-2 block">تومان</span>
+        </div>
+      </div>
+
+      <div class="product-card glass rounded-3xl overflow-hidden">
+        <div class="h-64 bg-zinc-950/80 flex items-center justify-center p-8">
+          <img src="images/p2.png" alt="پروژکتور" class="product-img max-h-full object-contain">
+        </div>
+        <div class="p-8 text-center border-t border-amber-500/10">
+          <h3 class="text-white text-xl font-bold mb-4 h-14">۳۰۰ وات اسلایدی</h3>
+          <div class="price-value">۳۳,۹۰۰,۰۰۰</div>
+          <span class="text-amber-500 text-sm mt-2 block">تومان</span>
+        </div>
+      </div>
+
+      <div class="product-card glass rounded-3xl overflow-hidden">
+        <div class="h-64 bg-zinc-950/80 flex items-center justify-center p-8">
+          <img src="images/p3.png" alt="پروژکتور" class="product-img max-h-full object-contain">
+        </div>
+        <div class="p-8 text-center border-t border-amber-500/10">
+          <h3 class="text-white text-xl font-bold mb-4 h-14">۲۰۰ وات اسلایدی</h3>
+          <div class="price-value">۲۹,۹۰۰,۰۰۰</div>
+          <span class="text-amber-500 text-sm mt-2 block">تومان</span>
+        </div>
+      </div>
+
+      <div class="product-card glass rounded-3xl overflow-hidden">
+        <div class="h-64 bg-zinc-950/80 flex items-center justify-center p-8">
+          <img src="images/p4.png" alt="پروژکتور" class="product-img max-h-full object-contain">
+        </div>
+        <div class="p-8 text-center border-t border-amber-500/10">
+          <h3 class="text-white text-xl font-bold mb-4 h-14">۳۰۰ وات چرخشی (دور)</h3>
+          <div class="price-value">۲۹,۰۰۰,۰۰۰</div>
+          <span class="text-amber-500 text-sm mt-2 block">تومان</span>
+        </div>
+      </div>
+
+      <div class="product-card glass rounded-3xl overflow-hidden">
+        <div class="h-64 bg-zinc-950/80 flex items-center justify-center p-8">
+          <img src="images/p5.png" alt="پروژکتور" class="product-img max-h-full object-contain">
+        </div>
+        <div class="p-8 text-center border-t border-amber-500/10">
+          <h3 class="text-white text-xl font-bold mb-4 h-14">۲۰۰ وات چرخشی (دور)</h3>
+          <div class="price-value">۲۴,۹۰۰,۰۰۰</div>
+          <span class="text-amber-500 text-sm mt-2 block">تومان</span>
+        </div>
+      </div>
+
+      <div class="product-card glass rounded-3xl overflow-hidden">
+        <div class="h-64 bg-zinc-950/80 flex items-center justify-center p-8">
+          <img src="images/p6.png" alt="پروژکتور" class="product-img max-h-full object-contain">
+        </div>
+        <div class="p-8 text-center border-t border-amber-500/10">
+          <h3 class="text-white text-xl font-bold mb-4 h-14">۱۰۰ وات اسلایدی</h3>
+          <div class="price-value">۱۹,۷۰۰,۰۰۰</div>
+          <span class="text-amber-500 text-sm mt-2 block">تومان</span>
+        </div>
+      </div>
+
+      <div class="product-card glass rounded-3xl overflow-hidden">
+        <div class="h-64 bg-zinc-950/80 flex items-center justify-center p-8">
+          <img src="images/p7.png" alt="پروژکتور" class="product-img max-h-full object-contain">
+        </div>
+        <div class="p-8 text-center border-t border-amber-500/10">
+          <h3 class="text-white text-xl font-bold mb-4 h-14">۱۰۰ وات چرخشی (دور)</h3>
+          <div class="price-value">۱۷,۵۰۰,۰۰۰</div>
+          <span class="text-amber-500 text-sm mt-2 block">تومان</span>
+        </div>
+      </div>
+
+      <div class="product-card glass rounded-3xl overflow-hidden">
+        <div class="h-64 bg-zinc-950/80 flex items-center justify-center p-8">
+          <img src="images/p8.png" alt="پروژکتور" class="product-img max-h-full object-contain">
+        </div>
+        <div class="p-8 text-center border-t border-amber-500/10">
+          <h3 class="text-white text-xl font-bold mb-4 h-14">۷۰ وات چرخشی</h3>
+          <div class="price-value">۱۴,۹۰۰,۰۰۰</div>
+          <span class="text-amber-500 text-sm mt-2 block">تومان</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="bg-black/90 py-16 text-center border-t border-amber-500/20">
+    <div class="max-w-7xl mx-auto px-4">
+      <p class="text-amber-500 font-bold text-xl mb-4">لاکچری‌ترین لوگو پروژکتورهای ایران</p>
+      <p class="text-zinc-500">© تمام حقوق برای این مجموعه محفوظ است - ۱۴۰۵</p>
+    </div>
+  </footer>
+
+</body>
+</html>
