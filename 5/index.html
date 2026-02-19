@@ -9,13 +9,12 @@
     
     <style>
         :root {
-            --bg: #050508;
-            --gold-light: #FFD700;
-            --gold-dark: #b8860b;
+            --bg: #040406;
+            --gold: #FFD700;
             --copper: #b87333;
             --neon-blue: #00f3ff;
-            --glass-bg: rgba(0, 243, 255, 0.05);
-            --glass-border: rgba(0, 243, 255, 0.3);
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(0, 243, 255, 0.2);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,127 +27,123 @@
             min-height: 100vh;
         }
 
-        /* پس‌زمینه با عمق نوری */
-        .bg-gradient {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 20%, rgba(184, 115, 51, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(74, 74, 74, 0.2) 0%, transparent 50%),
-                        #050508;
+        /* پس‌زمینه عمیق */
+        .bg-layer {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 10%, rgba(184, 115, 51, 0.1) 0%, transparent 60%), #040406;
             z-index: -2;
         }
 
-        /* ذرات معلق طلا */
-        .gold-particle {
-            position: fixed; background: linear-gradient(45deg, var(--gold-light), var(--copper));
+        /* ذرات طلای درشت و درخشان */
+        .gold-sparkle {
+            position: fixed; background: linear-gradient(45deg, var(--gold), #fff);
             border-radius: 50%; pointer-events: none; opacity: 0;
-            animation: rise linear infinite; z-index: -1;
+            animation: floatUp linear infinite; z-index: -1;
+            box-shadow: 0 0 10px var(--gold);
         }
-        @keyframes rise {
-            0% { transform: translateY(110vh) translateX(0) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.8; }
-            80% { opacity: 0.8; }
-            100% { transform: translateY(-10vh) translateX(50px) rotate(360deg); opacity: 0; }
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) scale(0); opacity: 0; }
+            30% { opacity: 0.7; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
         }
 
-        .container { width: 90%; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; }
+        .container { width: 92%; max-width: 1200px; margin: 0 auto; }
 
         header {
             min-height: 50vh; display: flex; align-items: center; justify-content: center;
-            flex-direction: column; text-align: center; padding-top: 50px;
+            flex-direction: column; text-align: center; padding: 60px 0;
         }
 
-        /* تایتل با گرادینت متحرک و چرخان */
-        .animated-title {
-            font-size: clamp(2.5rem, 8vw, 5.5rem); font-weight: 900;
-            background: linear-gradient(270deg, #fff, var(--gold-light), var(--copper), #fff);
-            background-size: 400% 400%;
+        /* تایتل با گرادینت متحرک کوپری-طلایی */
+        .moving-title {
+            font-size: clamp(2.8rem, 8vw, 5rem); font-weight: 900;
+            background: linear-gradient(90deg, #fff, var(--copper), var(--gold), #fff);
+            background-size: 300% auto;
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            animation: gradientMove 8s ease infinite;
-            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.2));
+            animation: shineText 6s linear infinite;
         }
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        @keyframes shineText { to { background-position: 300% center; } }
+
+        /* باکس محصولات شیشه‌ای با افکت برق زدن */
+        .grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 30px; padding-bottom: 120px;
         }
 
-        .product-stage {
-            position: relative; width: 250px; height: 250px; margin: 20px auto;
-            display: flex; justify-content: center; align-items: center;
-        }
-        /* هاله نوری پشت محصول اصلی */
-        .glow-ring {
-            position: absolute; width: 100%; height: 100%;
-            border-radius: 50%; background: radial-gradient(circle, rgba(0, 243, 255, 0.15) 0%, transparent 70%);
-            animation: pulse 4s ease-in-out infinite;
-        }
-        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.4); opacity: 0.2; } }
-
-        .hero-img { width: 90%; z-index: 5; filter: drop-shadow(0 10px 30px #000); animation: float 6s infinite; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-
-        /* باکس محصولات - نئون آبی */
-        .products-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px; padding-bottom: 120px;
-        }
-
-        .card {
-            background: var(--glass-bg); backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border); border-radius: 25px;
-            padding: 25px; text-align: center; transition: 0.4s;
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 30px; padding: 30px; text-align: center;
+            transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+            position: relative; overflow: hidden;
             display: flex; flex-direction: column; justify-content: space-between;
         }
-        .card:hover { transform: translateY(-10px); border-color: var(--neon-blue); box-shadow: 0 0 25px rgba(0, 243, 255, 0.2); }
 
-        .prod-img { max-width: 80%; height: 160px; object-fit: contain; margin: 0 auto 15px; filter: drop-shadow(0 5px 15px #000); }
-        .prod-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 10px; color: #eee; }
-        .prod-price { font-size: 1.7rem; font-weight: 900; color: var(--neon-blue); margin-bottom: 15px; }
-
-        /* دکمه آبی درخشان */
-        .btn-blue {
-            display: block; width: 100%; padding: 12px;
-            background: transparent; color: var(--neon-blue); border: 2px solid var(--neon-blue);
-            border-radius: 15px; font-weight: bold; text-decoration: none; transition: 0.3s;
-            text-shadow: 0 0 5px var(--neon-blue);
+        /* افکت برق زدن کارد در هاور */
+        .glass-card::before {
+            content: ''; position: absolute; top: 0; left: -150%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.1), transparent);
+            transform: skewX(-20deg); transition: 0.8s;
         }
-        .btn-blue:hover { background: var(--neon-blue); color: #000; box-shadow: 0 0 20px var(--neon-blue); }
+        .glass-card:hover::before { left: 150%; }
 
-        /* فوتر موبایل - ثابت */
+        .glass-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--neon-blue);
+            box-shadow: 0 20px 40px rgba(0, 243, 255, 0.15);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .prod-img { max-width: 85%; height: 180px; object-fit: contain; margin-bottom: 20px; filter: drop-shadow(0 10px 20px #000); }
+        .prod-title { font-size: 1.15rem; font-weight: bold; color: #fff; margin-bottom: 15px; }
+        
+        /* قیمت طلایی */
+        .prod-price { font-size: 1.8rem; font-weight: 900; color: var(--gold); margin-bottom: 20px; text-shadow: 0 0 15px rgba(255, 215, 0, 0.3); }
+
+        /* دکمه آبی نئونی */
+        .btn-neon {
+            display: block; width: 100%; padding: 14px;
+            background: transparent; color: var(--neon-blue); border: 2px solid var(--neon-blue);
+            border-radius: 18px; font-weight: 800; text-decoration: none; transition: 0.3s;
+            box-shadow: inset 0 0 10px rgba(0, 243, 255, 0.1);
+        }
+        .btn-neon:hover {
+            background: var(--neon-blue); color: #000;
+            box-shadow: 0 0 25px var(--neon-blue);
+        }
+
+        /* فوتر موبایل */
         .footer {
             position: fixed; bottom: 0; left: 0; width: 100%;
-            background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(15px);
-            border-top: 1px solid #333; padding: 15px 25px;
+            background: rgba(5, 5, 8, 0.95); backdrop-filter: blur(15px);
+            border-top: 1px solid #222; padding: 15px 30px;
             display: flex; justify-content: space-between; align-items: center; z-index: 1000;
         }
 
-        .btn-whatsapp-footer {
-            background: #25D366; color: white; padding: 10px 20px; border-radius: 50px;
-            text-decoration: none; font-weight: bold; display: flex; align-items: center; gap: 8px;
-            box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
+        .btn-wa-footer {
+            background: #25D366; color: white; padding: 12px 25px; border-radius: 50px;
+            text-decoration: none; font-weight: bold; display: flex; align-items: center; gap: 10px;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
         }
 
-        .call-info { text-align: right; }
-        .call-info a { color: white; text-decoration: none; font-weight: 900; font-size: 1.2rem; }
+        .call-link { text-align: right; }
+        .call-link a { color: white; text-decoration: none; font-weight: 900; font-size: 1.3rem; }
 
-        @media (max-width: 480px) { .btn-whatsapp-footer span { display: none; } }
+        @media (max-width: 500px) { .btn-wa-footer span { display: none; } }
     </style>
 </head>
 <body>
 
-    <div class="bg-gradient"></div>
+    <div class="bg-layer"></div>
 
     <header class="container">
-        <h1 class="animated-title">لوگو پروژکتور</h1>
-        <div class="product-stage">
-            <div class="glow-ring"></div>
-            <img src="images/p1.png" class="hero-img" alt="Luxury Projector">
-        </div>
+        <h1 class="moving-title">لوگو پروژکتور</h1>
+        <p style="color: var(--copper); letter-spacing: 4px; font-weight: bold; margin-top: 10px; font-size: 0.8rem;">LUXURY LIGHTING SOLUTIONS</p>
     </header>
 
     <section class="container">
-        <div class="products-grid" id="grid">
+        <div class="grid" id="productGrid">
             <script>
                 const products = [
                     { id: 1, name: "لوگو پروژکتور 1200W قدرتمند", price: "144,000,000" },
@@ -161,47 +156,50 @@
                     { id: 8, name: "لوگو پروژکتور 70W چرخشی", price: "14,900,000" }
                 ];
 
-                document.getElementById('grid').innerHTML = products.map(p => `
-                    <div class="card">
-                        <img src="images/p${p.id}.png" class="prod-img">
+                document.getElementById('productGrid').innerHTML = products.map(p => {
+                    const msg = encodeURIComponent(`سلام، وقت بخیر. من در مورد مدل ${p.name} با قیمت ${p.price} تومان نیاز به مشاوره دارم.`);
+                    return `
+                    <div class="glass-card">
+                        <img src="images/p${p.id}.png" class="prod-img" alt="${p.name}">
                         <h3 class="prod-title">${p.name}</h3>
-                        <div class="prod-price">${p.price} <small style="font-size: 0.7rem;">تومان</small></div>
-                        <a href="https://wa.me/989195703080?text=${encodeURIComponent('سلام، من در مورد مدل ' + p.name + ' سوال داشتم.')}" class="btn-blue">
+                        <div class="prod-price">${p.price} <span style="font-size: 0.8rem; color: #888;">تومان</span></div>
+                        <a href="https://wa.me/989195703080?text=${msg}" class="btn-neon">
                             مشاوره در واتساپ
                         </a>
                     </div>
-                `).join('');
+                `}).join('');
             </script>
         </div>
     </section>
 
     <div class="footer">
-        <a href="https://wa.me/989195703080?text=سلام، در مورد لوگو پروژکتور مشاوره می‌خواستم" class="btn-whatsapp-footer">
-            <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i>
+        <a href="https://wa.me/989195703080?text=سلام، در مورد لوگو پروژکتور مشاوره می‌خواستم" class="btn-wa-footer">
+            <i class="fab fa-whatsapp" style="font-size: 1.6rem;"></i>
             <span>مشاوره در واتساپ</span>
         </a>
-        <div class="call-info">
-            <span style="font-size: 0.7rem; color: #888;">شماره تماس:</span><br>
+        <div class="call-link">
+            <span style="font-size: 0.7rem; color: #777;">تماس با کارشناس:</span><br>
             <a href="tel:09195703080">۰۹۱۹۵۷۰۳۰۸۰</a>
         </div>
     </div>
 
     <script>
-        // ایجاد ذرات طلا
-        function initGold() {
-            for (let i = 0; i < 50; i++) {
+        // ایجاد ذرات طلای درشت‌تر
+        function makeGold() {
+            const body = document.body;
+            for (let i = 0; i < 40; i++) {
                 let p = document.createElement('div');
-                p.className = 'gold-particle';
-                let size = Math.random() * 4 + 1;
+                p.className = 'gold-sparkle';
+                let size = Math.random() * 6 + 2; // درشت‌تر از قبل
                 p.style.width = size + 'px';
                 p.style.height = size + 'px';
                 p.style.left = Math.random() * 100 + 'vw';
-                p.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                p.style.animationDuration = (Math.random() * 7 + 5) + 's';
                 p.style.animationDelay = (Math.random() * 5) + 's';
-                document.body.appendChild(p);
+                body.appendChild(p);
             }
         }
-        initGold();
+        makeGold();
     </script>
 
 </body>
