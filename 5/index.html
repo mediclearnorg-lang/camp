@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ویترین لوکس لوگو پروژکتور</title>
+    <title>ویترین لوکس لوگو پروژکتور | نسخه نهایی</title>
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -17,106 +17,161 @@
             --border: rgba(0, 243, 255, 0.2);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
             background-color: var(--bg);
             color: white;
-            font-family: 'Vazirmatn', sans-serif;
+            font-family: 'Vazirmatn', sans-serif !important;
             overflow-x: hidden;
             min-height: 100vh;
         }
 
-        /* پس‌زمینه عمیق */
+        /* پس‌زمینه و ذرات طلا */
         .bg-layer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 10%, rgba(184, 115, 51, 0.1) 0%, transparent 60%), #040406;
+            background: radial-gradient(circle at 50% 25%, rgba(184, 115, 51, 0.12) 0%, transparent 55%), #040406;
             z-index: -2;
         }
 
-        /* ذرات طلای درشت و درخشان */
-        .gold-sparkle {
-            position: fixed; background: linear-gradient(45deg, var(--gold), #fff);
-            border-radius: 50%; pointer-events: none; opacity: 0;
-            animation: floatUp linear infinite; z-index: -1;
-            box-shadow: 0 0 10px var(--gold);
+        .particle {
+            position: fixed; border-radius: 50%; background: var(--gold);
+            box-shadow: 0 0 5px var(--gold); pointer-events: none; opacity: 0;
+            animation: float-up linear infinite; z-index: -1;
         }
-        @keyframes floatUp {
-            0% { transform: translateY(110vh) scale(0); opacity: 0; }
-            30% { opacity: 0.7; }
-            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        @keyframes float-up {
+            0% { transform: translateY(105vh) scale(0); opacity: 0; }
+            50% { opacity: 0.6; }
+            100% { transform: translateY(-5vh) scale(1); opacity: 0; }
         }
 
-        .container { width: 92%; max-width: 1200px; margin: 0 auto; }
+        .container { width: 92%; max-width: 1200px; margin: 0 auto; position: relative; }
 
+        /* هدر و تایتل چرخان */
         header {
-            min-height: 50vh; display: flex; align-items: center; justify-content: center;
+            min-height: 75vh; display: flex; align-items: center; justify-content: center;
             flex-direction: column; text-align: center; padding: 60px 0;
         }
 
-        /* تایتل با گرادینت متحرک کوپری-طلایی */
         .moving-title {
-            font-size: clamp(2.8rem, 8vw, 5rem); font-weight: 900;
+            font-size: clamp(2.5rem, 8vw, 4.8rem); font-weight: 900;
             background: linear-gradient(90deg, #fff, var(--copper), var(--gold), #fff);
-            background-size: 300% auto;
+            background-size: 200% auto;
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            animation: shineText 6s linear infinite;
+            animation: shineText 5s linear infinite;
+            margin-bottom: 15px;
         }
-        @keyframes shineText { to { background-position: 300% center; } }
+        @keyframes shineText { to { background-position: 200% center; } }
 
-        /* باکس محصولات شیشه‌ای با افکت برق زدن */
-        .grid {
+        .sub-copy {
+            font-size: 1.1rem; color: #888; max-width: 600px; line-height: 1.8;
+            margin-bottom: 40px; font-weight: 300;
+        }
+
+        /* هیرو و کادر دایره‌ای متحرک */
+        .hero-stage {
+            position: relative; width: 300px; height: 300px;
+            display: flex; align-items: center; justify-content: center; margin-bottom: 40px;
+        }
+        
+        .hero-ring {
+            position: absolute; width: 100%; height: 100%; border-radius: 50%;
+            border: 2px solid transparent;
+            background: conic-gradient(from 0deg, transparent 0%, var(--neon-blue) 50%, transparent 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor; mask-composite: exclude;
+            animation: rotate-ring 4s linear infinite;
+        }
+        @keyframes rotate-ring { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .hero-img { width: 85%; z-index: 5; filter: drop-shadow(0 20px 40px #000); animation: float 6s infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+        /* محصولات - شیشه‌ای و نئون */
+        .products-grid {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-            gap: 30px; padding-bottom: 120px;
+            gap: 30px; padding-bottom: 80px;
         }
 
-        .glass-card {
+        .liquid-card {
             background: var(--glass);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
             border: 1px solid var(--border);
-            border-radius: 30px; padding: 30px; text-align: center;
+            border-radius: 35px; padding: 30px; text-align: center;
             transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1);
             position: relative; overflow: hidden;
             display: flex; flex-direction: column; justify-content: space-between;
         }
 
-        /* افکت برق زدن کارد در هاور */
-        .glass-card::before {
-            content: ''; position: absolute; top: 0; left: -150%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.1), transparent);
-            transform: skewX(-20deg); transition: 0.8s;
+        /* افکت درخشش شیشه‌ای روی هاور */
+        .liquid-card::after {
+            content: ''; position: absolute; top: -50%; left: -100%; width: 50%; height: 200%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(30deg); transition: 0.8s;
         }
-        .glass-card:hover::before { left: 150%; }
+        .liquid-card:hover::after { left: 150%; }
 
-        .glass-card:hover {
-            transform: translateY(-15px);
+        .liquid-card:hover {
+            transform: translateY(-15px) scale(1.02);
             border-color: var(--neon-blue);
-            box-shadow: 0 20px 40px rgba(0, 243, 255, 0.15);
+            box-shadow: 0 20px 50px rgba(0, 243, 255, 0.2);
             background: rgba(255, 255, 255, 0.05);
         }
 
-        .prod-img { max-width: 85%; height: 180px; object-fit: contain; margin-bottom: 20px; filter: drop-shadow(0 10px 20px #000); }
-        .prod-title { font-size: 1.15rem; font-weight: bold; color: #fff; margin-bottom: 15px; }
-        
-        /* قیمت طلایی */
-        .prod-price { font-size: 1.8rem; font-weight: 900; color: var(--gold); margin-bottom: 20px; text-shadow: 0 0 15px rgba(255, 215, 0, 0.3); }
+        .p-img-box { height: 170px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+        .p-img { max-width: 90%; max-height: 100%; filter: drop-shadow(0 10px 20px #000); }
 
-        /* دکمه آبی نئونی */
-        .btn-neon {
-            display: block; width: 100%; padding: 14px;
+        .p-title { font-size: 1.1rem; font-weight: bold; color: #efefef; min-height: 3rem; margin-bottom: 10px; }
+        .p-price { font-size: 1.8rem; font-weight: 900; color: var(--gold); margin-bottom: 25px; text-shadow: 0 0 15px rgba(255, 215, 0, 0.3); }
+
+        .btn-wa-item {
+            display: block; width: 100%; padding: 15px;
             background: transparent; color: var(--neon-blue); border: 2px solid var(--neon-blue);
-            border-radius: 18px; font-weight: 800; text-decoration: none; transition: 0.3s;
-            box-shadow: inset 0 0 10px rgba(0, 243, 255, 0.1);
+            border-radius: 20px; font-weight: 800; text-decoration: none; transition: 0.3s;
         }
-        .btn-neon:hover {
-            background: var(--neon-blue); color: #000;
-            box-shadow: 0 0 25px var(--neon-blue);
+        .btn-wa-item:hover { background: var(--neon-blue); color: #000; box-shadow: 0 0 25px var(--neon-blue); }
+
+        /* --- گالری اسلایدری انباشته هوشمند --- */
+        .gallery-wrapper { padding: 100px 0 180px; position: relative; }
+        .gallery-title { text-align: center; font-size: 2.2rem; font-weight: 900; margin-bottom: 60px; color: #fff; }
+
+        .slider-outer {
+            position: relative; width: 100%; max-width: 450px; height: 500px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: center;
         }
 
-        /* فوتر موبایل */
+        .slider-content { position: relative; width: 85%; height: 100%; perspective: 1000px; cursor: grab; }
+        .slider-content:active { cursor: grabbing; }
+
+        .slide {
+            position: absolute; width: 100%; height: 100%; border-radius: 40px; overflow: hidden;
+            border: 1px solid var(--border); background: #000;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+        }
+        .slide img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+
+        .slide.active { z-index: 10; transform: translateX(0) scale(1); opacity: 1; }
+        .slide.next { z-index: 5; transform: translateX(-40px) scale(0.9); opacity: 0.5; filter: blur(2px); }
+        .slide.prev { z-index: 5; transform: translateX(40px) scale(0.9); opacity: 0.5; filter: blur(2px); }
+        .slide.hidden { z-index: 1; transform: translateX(0) scale(0.7); opacity: 0; }
+
+        /* دکمه‌های کناری گالری */
+        .nav-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 55px; height: 55px; background: var(--glass);
+            border: 1px solid var(--border); color: var(--neon-blue);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; z-index: 20; transition: 0.3s;
+        }
+        .nav-btn:hover { background: var(--neon-blue); color: #000; box-shadow: 0 0 15px var(--neon-blue); }
+        .nav-btn.btn-prev { right: -20px; }
+        .nav-btn.btn-next { left: -20px; }
+
+        /* فوتر ثابت */
         .footer {
             position: fixed; bottom: 0; left: 0; width: 100%;
-            background: rgba(5, 5, 8, 0.95); backdrop-filter: blur(15px);
+            background: rgba(5, 5, 8, 0.96); backdrop-filter: blur(20px);
             border-top: 1px solid #222; padding: 15px 30px;
             display: flex; justify-content: space-between; align-items: center; z-index: 1000;
         }
@@ -127,10 +182,14 @@
             box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
         }
 
-        .call-link { text-align: right; }
-        .call-link a { color: white; text-decoration: none; font-weight: 900; font-size: 1.3rem; }
+        .call-area a { color: white; text-decoration: none; font-weight: 900; font-size: 1.3rem; }
 
-        @media (max-width: 500px) { .btn-wa-footer span { display: none; } }
+        @media (max-width: 600px) {
+            .slider-outer { max-width: 300px; height: 400px; }
+            .nav-btn { width: 45px; height: 45px; }
+            .nav-btn.btn-prev { right: -10px; }
+            .nav-btn.btn-next { left: -10px; }
+        }
     </style>
 </head>
 <body>
@@ -139,68 +198,112 @@
 
     <header class="container">
         <h1 class="moving-title">لوگو پروژکتور</h1>
-        <p style="color: var(--copper); letter-spacing: 4px; font-weight: bold; margin-top: 10px; font-size: 0.8rem;">LUXURY LIGHTING SOLUTIONS</p>
+        <p class="sub-copy">
+            با تکنولوژی تابش هوشمند، برند خود را بر روی هر سطحی حک کنید. 
+            راهکاری نوین برای درخشش کسب‌وکارهای لوکس و مدرن.
+        </p>
+        
+        <div class="hero-stage">
+            <div class="hero-ring"></div>
+            <img src="images/p1.png" class="hero-img" alt="Product Hero">
+        </div>
     </header>
 
     <section class="container">
-        <div class="grid" id="productGrid">
-            <script>
-                const products = [
-                    { id: 1, name: "لوگو پروژکتور 1200W قدرتمند", price: "144,000,000" },
-                    { id: 2, name: "لوگو پروژکتور 300W اسلایدی", price: "33,900,000" },
-                    { id: 3, name: "لوگو پروژکتور 200W اسلایدی", price: "29,900,000" },
-                    { id: 4, name: "لوگو پروژکتور 300W چرخشی", price: "29,000,000" },
-                    { id: 5, name: "لوگو پروژکتور 200W چرخشی", price: "24,900,000" },
-                    { id: 6, name: "لوگو پروژکتور 100W اسلایدی", price: "19,700,000" },
-                    { id: 7, name: "لوگو پروژکتور 100W چرخشی", price: "17,500,000" },
-                    { id: 8, name: "لوگو پروژکتور 70W چرخشی", price: "14,900,000" }
-                ];
+        <div class="products-grid" id="mainGrid"></div>
+    </section>
 
-                document.getElementById('productGrid').innerHTML = products.map(p => {
-                    const msg = encodeURIComponent(`سلام، وقت بخیر. من در مورد مدل ${p.name} با قیمت ${p.price} تومان نیاز به مشاوره دارم.`);
-                    return `
-                    <div class="glass-card">
-                        <img src="images/p${p.id}.png" class="prod-img" alt="${p.name}">
-                        <h3 class="prod-title">${p.name}</h3>
-                        <div class="prod-price">${p.price} <span style="font-size: 0.8rem; color: #888;">تومان</span></div>
-                        <a href="https://wa.me/989195703080?text=${msg}" class="btn-neon">
-                            مشاوره در واتساپ
-                        </a>
-                    </div>
-                `}).join('');
-            </script>
+    <section class="gallery-wrapper container">
+        <h2 class="gallery-title">پروژه‌های اجرا شده</h2>
+        <div class="slider-outer">
+            <div class="nav-btn btn-prev" onclick="movePrev()"><i class="fas fa-chevron-right"></i></div>
+            <div class="slider-content" id="slider">
+                <div class="slide"><img src="images/g1.jpg" alt="اجرا ۱"></div>
+                <div class="slide"><img src="images/g2.jpg" alt="اجرا ۲"></div>
+                <div class="slide"><img src="images/g3.jpg" alt="اجرا ۳"></div>
+                <div class="slide"><img src="images/g4.jpg" alt="اجرا ۴"></div>
+            </div>
+            <div class="nav-btn btn-next" onclick="moveNext()"><i class="fas fa-chevron-left"></i></div>
         </div>
     </section>
 
     <div class="footer">
-        <a href="https://wa.me/989195703080?text=سلام، در مورد لوگو پروژکتور مشاوره می‌خواستم" class="btn-wa-footer">
+        <a href="https://wa.me/989195703080?text=سلام، وقت بخیر. مشاوره می‌خواستم" class="btn-wa-footer">
             <i class="fab fa-whatsapp" style="font-size: 1.6rem;"></i>
             <span>مشاوره در واتساپ</span>
         </a>
-        <div class="call-link">
-            <span style="font-size: 0.7rem; color: #777;">تماس با کارشناس:</span><br>
+        <div class="call-area">
             <a href="tel:09195703080">۰۹۱۹۵۷۰۳۰۸۰</a>
         </div>
     </div>
 
     <script>
-        // ایجاد ذرات طلای درشت‌تر
-        function makeGold() {
-            const body = document.body;
-            for (let i = 0; i < 40; i++) {
+        // دیتای محصولات
+        const products = [
+            { id: 1, name: "لوگو پروژکتور ۱۲۰۰ وات فوق قدرتمند", price: "۱۴۴,۰۰۰,۰۰۰" },
+            { id: 2, name: "لوگو پروژکتور ۳۰۰ وات اسلایدی", price: "۳۳,۹۰۰,۰۰۰" },
+            { id: 3, name: "لوگو پروژکتور ۲۰۰ وات اسلایدی", price: "۲۹,۹۰۰,۰۰۰" },
+            { id: 4, name: "لوگو پروژکتور ۳۰۰ وات چرخشی", price: "۲۹,۰۰۰,۰۰۰" },
+            { id: 5, name: "لوگو پروژکتور ۲۰۰ وات چرخشی", price: "۲۴,۹۰۰,۰۰۰" },
+            { id: 6, name: "لوگو پروژکتور ۱۰۰ وات اسلایدی", price: "۱۹,۷۰۰,۰۰۰" },
+            { id: 7, name: "لوگو پروژکتور ۱۰۰ وات چرخشی", price: "۱۷,۵۰۰,۰۰۰" },
+            { id: 8, name: "لوگو پروژکتور ۷۰ وات چرخشی", price: "۱۴,۹۰۰,۰۰۰" }
+        ];
+
+        document.getElementById('mainGrid').innerHTML = products.map(p => {
+            const waMsg = encodeURIComponent(`سلام، برای خرید ${p.name} با قیمت ${p.price} نیاز به مشاوره دارم.`);
+            return `
+            <div class="liquid-card">
+                <div class="p-img-box"><img src="images/p${p.id}.png" class="p-img"></div>
+                <h3 class="p-title">${p.name}</h3>
+                <div class="p-price">${p.price} <small style="font-size: 0.7rem; color: #666;">تومان</small></div>
+                <a href="https://wa.me/989195703080?text=${waMsg}" class="btn-wa-item">مشاوره این مدل</a>
+            </div>
+        `}).join('');
+
+        // منطق گالری
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const slider = document.getElementById('slider');
+
+        function updateSlider() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'next', 'prev', 'hidden');
+                if (index === currentIndex) slide.classList.add('active');
+                else if (index === (currentIndex + 1) % slides.length) slide.classList.add('next');
+                else if (index === (currentIndex - 1 + slides.length) % slides.length) slide.classList.add('prev');
+                else slide.classList.add('hidden');
+            });
+        }
+
+        function moveNext() { currentIndex = (currentIndex + 1) % slides.length; updateSlider(); }
+        function movePrev() { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateSlider(); }
+
+        // قابلیت درگ و سوایپ
+        let startX = 0;
+        slider.addEventListener('touchstart', (e) => startX = e.touches[0].clientX);
+        slider.addEventListener('touchend', (e) => {
+            let endX = e.changedTouches[0].clientX;
+            if (startX - endX > 50) moveNext();
+            if (endX - startX > 50) movePrev();
+        });
+
+        updateSlider();
+
+        // ایجاد ذرات طلا
+        function createDust() {
+            for (let i = 0; i < 45; i++) {
                 let p = document.createElement('div');
-                p.className = 'gold-sparkle';
-                let size = Math.random() * 6 + 2; // درشت‌تر از قبل
-                p.style.width = size + 'px';
-                p.style.height = size + 'px';
+                p.className = 'particle';
+                let size = Math.random() * 3 + 1;
+                p.style.width = size + 'px'; p.style.height = size + 'px';
                 p.style.left = Math.random() * 100 + 'vw';
-                p.style.animationDuration = (Math.random() * 7 + 5) + 's';
+                p.style.animationDuration = (Math.random() * 8 + 5) + 's';
                 p.style.animationDelay = (Math.random() * 5) + 's';
-                body.appendChild(p);
+                document.body.appendChild(p);
             }
         }
-        makeGold();
+        createDust();
     </script>
-
 </body>
 </html>
