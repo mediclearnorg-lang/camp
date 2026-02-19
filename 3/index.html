@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پروژکتور لوگو | نمایش قدرت برند</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- RESET & VARS --- */
+        :root {
+            --bg: #020202;
+            --gold: #FFD700;
+            --gold-dim: #b8860b;
+            --neon-purple: #bc13fe;
+            --neon-blue: #00f3ff;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            background-color: var(--bg);
+            color: white;
+            font-family: 'Vazirmatn', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* --- ANIMATED BACKGROUND --- */
+        .bg-gradient {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, #1a0b2e 0%, #000000 100%);
+            z-index: -2;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: floatOrb 20s infinite alternate;
+            z-index: -1;
+        }
+        .orb-1 { width: 300px; height: 300px; background: var(--neon-purple); top: -10%; right: -10%; }
+        .orb-2 { width: 400px; height: 400px; background: var(--gold-dim); bottom: -10%; left: -10%; animation-delay: -5s; }
+
+        @keyframes floatOrb { 0% { transform: translate(0, 0); } 100% { transform: translate(50px, 50px); } }
+
+        /* --- PARTICLES (JS Generated) --- */
+        .particle {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+            animation: rise 10s infinite ease-in;
+        }
+        @keyframes rise {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+
+        /* --- CONTAINER --- */
+        .container {
+            width: 90%; max-width: 1200px; margin: 0 auto;
+            position: relative; z-index: 10;
+        }
+
+        /* --- HEADER & HERO --- */
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding-top: 80px;
+            padding-bottom: 50px;
+        }
+
+        /* TEXT EFFECTS */
+        .glitch-text {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            background: linear-gradient(to right, #fff, var(--gold), #fff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes shine { to { background-position: 200% center; } }
+
+        .subtitle {
+            font-size: 1.2rem; color: #aaa; max-width: 600px; margin: 0 auto 40px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        /* --- THE PRODUCT STAGE (Rotating Border) --- */
+        .product-stage {
+            position: relative;
+            width: 300px; height: 300px;
+            margin: 50px auto;
+            display: flex; justify-content: center; align-items: center;
+        }
+
+        .product-stage::before {
+            content: ''; position: absolute;
+            width: 110%; height: 110%;
+            background: conic-gradient(transparent, transparent, transparent, var(--gold));
+            animation: rotateBorder 4s linear infinite;
+            border-radius: 50%;
+            mask-image: radial-gradient(transparent 65%, black 66%);
+            -webkit-mask-image: radial-gradient(transparent 65%, black 66%);
+        }
+
+        .product-stage::after {
+            content: ''; position: absolute;
+            width: 110%; height: 110%;
+            background: conic-gradient(transparent, transparent, transparent, var(--neon-purple));
+            animation: rotateBorder 4s linear infinite;
+            animation-delay: -2s;
+            border-radius: 50%;
+            mask-image: radial-gradient(transparent 65%, black 66%);
+            -webkit-mask-image: radial-gradient(transparent 65%, black 66%);
+        }
+
+        @keyframes rotateBorder { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .hero-img {
+            width: 100%; height: auto;
+            position: relative; z-index: 2;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8));
+            animation: float 6s ease-in-out infinite;
+            /* ایجاد بازتاب زیر عکس */
+            -webkit-box-reflect: below -10px linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.3));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* --- GLOWING BUTTON --- */
+        .btn-neon {
+            position: relative;
+            padding: 15px 50px;
+            background: rgba(0,0,0,0.6);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            overflow: hidden;
+            transition: 0.3s;
+            border-radius: 5px;
+            text-decoration: none;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+            margin-top: 30px;
+            display: inline-block;
+        }
+
+        .btn-neon:hover {
+            background: var(--gold);
+            color: #000;
+            box-shadow: 0 0 50px var(--gold), 0 0 20px var(--gold) inset;
+        }
+
+        /* --- FEATURES (Glass Cards) --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 100px 0;
+        }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.4s;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-purple);
+            box-shadow: 0 10px 40px rgba(188, 19, 254, 0.2);
+        }
+
+        .glass-card h3 { color: var(--gold); margin-bottom: 10px; font-size: 1.4rem; }
+        .glass-card p { color: #ccc; font-size: 0.9rem; line-height: 1.6; }
+        
+        .icon-box {
+            font-size: 2.5rem; margin-bottom: 20px;
+            background: linear-gradient(to bottom, var(--gold), #ff8c00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- SHOWCASE (Holographic Box) --- */
+        .showcase-wrapper {
+            position: relative;
+            padding: 5px;
+            background: linear-gradient(45deg, var(--gold), var(--neon-purple), var(--neon-blue));
+            border-radius: 20px;
+            animation: rainbowBorder 3s linear infinite;
+        }
+        @keyframes rainbowBorder { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(360deg); } }
+
+        .showcase-inner {
+            background: #0a0a0a;
+            border-radius: 18px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .showcase-img { width: 100%; display: block; opacity: 0.8; transition: 0.5s; }
+        .showcase-wrapper:hover .showcase-img { opacity: 1; transform: scale(1.05); }
+
+        .overlay-text {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            padding: 40px 20px;
+            background: linear-gradient(to top, #000, transparent);
+        }
+
+        /* --- STICKY FOOTER (Mobile) --- */
+        .sticky-footer {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--gold);
+            padding: 15px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 999;
+            transform: translateY(100%);
+            animation: slideUp 1s forwards 1s;
+        }
+        @keyframes slideUp { to { transform: translateY(0); } }
+
+        .price-new { color: var(--gold); font-size: 1.5rem; font-weight: bold; }
+        .price-old { color: #666; text-decoration: line-through; font-size: 0.9rem; margin-right: 10px; }
+        
+        .btn-call {
+            background: var(--gold); color: #000;
+            padding: 10px 25px; border-radius: 50px;
+            text-decoration: none; font-weight: bold;
+            box-shadow: 0 0 15px var(--gold);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); } }
+
+    </style>
+</head>
+<body>
+
+    <div class="bg-gradient"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <header>
+        <div class="container">
+            <h1 class="glitch-text">چشم‌ها را<br>خیره کنید</h1>
+            <p class="subtitle">تبلیغات نوری هوشمند با تکنولوژی کریستال نانو | پرستیژ برند شما در تاریکی شب</p>
+            
+            <div class="product-stage">
+                <img src="1.png" alt="پروژکتور لوگو" class="hero-img">
+            </div>
+
+            <a href="#details" class="btn-neon">
+                <i class="fas fa-arrow-down"></i> مشاهده جزئیات
+            </a>
+        </div>
+    </header>
+
+    <section id="details" class="container">
+        <div class="features-grid">
+            <div class="glass-card">
+                <div class="icon-box"><i class="fas fa-crown"></i></div>
+                <h3>طراحی Ultra-Premium</h3>
+                <p>بدنه تمام فلزی با آلیاژ آلومینیوم هواپیمایی. ضد آب، ضد ضربه و طراحی شده برای شرایط سخت محیطی.</p>
+            </div>
+            <div class="glass-card">
+                <div class="icon-box"><i class="fas fa-lightbulb"></i></div>
+                <h3>چیپ‌ست CREE آمریکا</h3>
+                <p>استفاده از قدرتمندترین چیپ نوری دنیا با عمر ۵۰,۰۰۰ ساعت. نوری که هرگز کم‌سو نمی‌شود.</p>
+            </div>
+            <div class="glass-card">
+                <div class="icon-box"><i class="fas fa-layer-group"></i></div>
+                <h3>لنزهای ۴ لایه</h3>
+                <p>سیستم اپتیکال پیشرفته برای وضوح تصویر 4K. لوگوی شما مثل تیغ برنده و شفاف دیده می‌شود.</p>
+            </div>
+        </div>
+
+        <h2 style="text-align: center; margin-bottom: 30px; font-size: 2rem;">نمونه واقعی نصب شده</h2>
+        <div class="showcase-wrapper">
+            <div class="showcase-inner">
+                <img src="2.png" alt="نمونه کار رستوران پالیز" class="showcase-img">
+                <div class="overlay-text">
+                    <h3 style="color: var(--neon-purple); font-size: 1.8rem; text-shadow: 0 0 10px #000;">رستوران پالیز</h3>
+                    <p>اجرا شده با لنز واید و چرخش ۳۶۰ درجه</p>
+                </div>
+            </div>
+        </div>
+        
+        <br><br><br><br><br> </section>
+
+    <div class="sticky-footer">
+        <div>
+            <div class="price-old">3,500,000</div>
+            <div class="price-new">2,850,000 <span style="font-size: 1rem;">تومان</span></div>
+        </div>
+        <a href="tel:09120000000" class="btn-call">
+            <i class="fas fa-phone"></i> تماس و خرید
+        </a>
+    </div>
+
+    <script>
+        // ساخت ذرات معلق (Particles)
+        function createParticles() {
+            const count = 30; // تعداد ذرات
+            const body = document.body;
+            
+            for (let i = 0; i < count; i++) {
+                let p = document.createElement('div');
+                p.classList.add('particle');
+                
+                // موقعیت و اندازه رندوم
+                let size = Math.random() * 5 + 1;
+                p.style.width = size + 'px';
+                p.style.height = size + 'px';
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.animationDuration = (Math.random() * 5 + 5) + 's'; // سرعت متفاوت
+                p.style.animationDelay = (Math.random() * 5) + 's';
+                
+                // رنگ رندوم (طلایی یا بنفش یا سفید)
+                let colors = ['#FFD700', '#bc13fe', '#ffffff'];
+                p.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                body.appendChild(p);
+            }
+        }
+        createParticles();
+    </script>
+</body>
+</html>
