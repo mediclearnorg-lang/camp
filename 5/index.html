@@ -2,8 +2,8 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ویترین لوکس لوگو پروژکتور | نسخه نهایی</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ویترین لوکس لوگو پروژکتور | نسخه نهایی بدون لرزش</title>
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -17,17 +17,25 @@
             --border: rgba(0, 243, 255, 0.2);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        /* جلوگیری از لرزش و اسکرول افقی */
+        html, body { 
+            margin: 0; padding: 0; 
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden; /* مهار لرزش عرضی */
+            width: 100%;
+            position: relative;
+        }
+
+        * { box-sizing: inherit; }
 
         body {
             background-color: var(--bg);
             color: white;
             font-family: 'Vazirmatn', sans-serif !important;
-            overflow-x: hidden;
             min-height: 100vh;
         }
 
-        /* پس‌زمینه و ذرات طلا */
         .bg-layer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at 50% 25%, rgba(184, 115, 51, 0.12) 0%, transparent 55%), #040406;
@@ -47,14 +55,13 @@
 
         .container { width: 92%; max-width: 1200px; margin: 0 auto; position: relative; }
 
-        /* هدر و تایتل چرخان */
         header {
             min-height: 75vh; display: flex; align-items: center; justify-content: center;
             flex-direction: column; text-align: center; padding: 60px 0;
         }
 
         .moving-title {
-            font-size: clamp(2.5rem, 8vw, 4.8rem); font-weight: 900;
+            font-size: clamp(2.3rem, 8vw, 4.8rem); font-weight: 900;
             background: linear-gradient(90deg, #fff, var(--copper), var(--gold), #fff);
             background-size: 200% auto;
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -64,13 +71,14 @@
         @keyframes shineText { to { background-position: 200% center; } }
 
         .sub-copy {
-            font-size: 1.1rem; color: #888; max-width: 600px; line-height: 1.8;
-            margin-bottom: 40px; font-weight: 300;
+            font-size: 1rem; color: #888; max-width: 550px; line-height: 1.8;
+            margin-bottom: 40px; font-weight: 300; padding: 0 10px;
         }
 
-        /* هیرو و کادر دایره‌ای متحرک */
         .hero-stage {
-            position: relative; width: 300px; height: 300px;
+            position: relative; 
+            width: 280px; height: 280px; 
+            max-width: 85vw; /* جلوگیری از بیرون زدن در گوشی‌های باریک */
             display: flex; align-items: center; justify-content: center; margin-bottom: 40px;
         }
         
@@ -84,111 +92,103 @@
         }
         @keyframes rotate-ring { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        .hero-img { width: 85%; z-index: 5; filter: drop-shadow(0 20px 40px #000); animation: float 6s infinite; }
+        .hero-img { width: 80%; z-index: 5; filter: drop-shadow(0 20px 40px #000); animation: float 6s infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        /* محصولات - شیشه‌ای و نئون */
         .products-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-            gap: 30px; padding-bottom: 80px;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px; padding-bottom: 80px;
         }
 
         .liquid-card {
             background: var(--glass);
             backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
             border: 1px solid var(--border);
-            border-radius: 35px; padding: 30px; text-align: center;
+            border-radius: 30px; padding: 25px; text-align: center;
             transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1);
             position: relative; overflow: hidden;
             display: flex; flex-direction: column; justify-content: space-between;
         }
 
-        /* افکت درخشش شیشه‌ای روی هاور */
         .liquid-card::after {
             content: ''; position: absolute; top: -50%; left: -100%; width: 50%; height: 200%;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.08), transparent);
             transform: rotate(30deg); transition: 0.8s;
         }
         .liquid-card:hover::after { left: 150%; }
 
         .liquid-card:hover {
-            transform: translateY(-15px) scale(1.02);
+            transform: translateY(-12px);
             border-color: var(--neon-blue);
-            box-shadow: 0 20px 50px rgba(0, 243, 255, 0.2);
-            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 15px 40px rgba(0, 243, 255, 0.2);
         }
 
-        .p-img-box { height: 170px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
-        .p-img { max-width: 90%; max-height: 100%; filter: drop-shadow(0 10px 20px #000); }
+        .p-img-box { height: 160px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; }
+        .p-img { max-width: 85%; max-height: 100%; filter: drop-shadow(0 10px 15px #000); }
 
-        .p-title { font-size: 1.1rem; font-weight: bold; color: #efefef; min-height: 3rem; margin-bottom: 10px; }
-        .p-price { font-size: 1.8rem; font-weight: 900; color: var(--gold); margin-bottom: 25px; text-shadow: 0 0 15px rgba(255, 215, 0, 0.3); }
+        .p-title { font-size: 1.05rem; font-weight: bold; color: #efefef; min-height: 3rem; margin-bottom: 10px; }
+        .p-price { font-size: 1.7rem; font-weight: 900; color: var(--gold); margin-bottom: 20px; }
 
         .btn-wa-item {
-            display: block; width: 100%; padding: 15px;
+            display: block; width: 100%; padding: 13px;
             background: transparent; color: var(--neon-blue); border: 2px solid var(--neon-blue);
-            border-radius: 20px; font-weight: 800; text-decoration: none; transition: 0.3s;
+            border-radius: 18px; font-weight: 800; text-decoration: none; transition: 0.3s;
+            font-size: 0.9rem;
         }
-        .btn-wa-item:hover { background: var(--neon-blue); color: #000; box-shadow: 0 0 25px var(--neon-blue); }
+        .btn-wa-item:hover { background: var(--neon-blue); color: #000; box-shadow: 0 0 20px var(--neon-blue); }
 
-        /* --- گالری اسلایدری انباشته هوشمند --- */
-        .gallery-wrapper { padding: 100px 0 180px; position: relative; }
-        .gallery-title { text-align: center; font-size: 2.2rem; font-weight: 900; margin-bottom: 60px; color: #fff; }
+        /* گالری اسلایدری */
+        .gallery-wrapper { padding: 80px 0 160px; position: relative; width: 100%; }
+        .gallery-title { text-align: center; font-size: 2rem; font-weight: 900; margin-bottom: 50px; color: #fff; }
 
         .slider-outer {
-            position: relative; width: 100%; max-width: 450px; height: 500px; margin: 0 auto;
+            position: relative; width: 100%; max-width: 420px; height: 480px; margin: 0 auto;
             display: flex; align-items: center; justify-content: center;
         }
 
-        .slider-content { position: relative; width: 85%; height: 100%; perspective: 1000px; cursor: grab; }
-        .slider-content:active { cursor: grabbing; }
+        .slider-content { position: relative; width: 80%; height: 100%; perspective: 1000px; cursor: grab; }
 
         .slide {
-            position: absolute; width: 100%; height: 100%; border-radius: 40px; overflow: hidden;
+            position: absolute; width: 100%; height: 100%; border-radius: 35px; overflow: hidden;
             border: 1px solid var(--border); background: #000;
             transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
         }
         .slide img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 
         .slide.active { z-index: 10; transform: translateX(0) scale(1); opacity: 1; }
-        .slide.next { z-index: 5; transform: translateX(-40px) scale(0.9); opacity: 0.5; filter: blur(2px); }
-        .slide.prev { z-index: 5; transform: translateX(40px) scale(0.9); opacity: 0.5; filter: blur(2px); }
+        .slide.next { z-index: 5; transform: translateX(-30px) scale(0.9); opacity: 0.5; filter: blur(2px); }
+        .slide.prev { z-index: 5; transform: translateX(30px) scale(0.9); opacity: 0.5; filter: blur(2px); }
         .slide.hidden { z-index: 1; transform: translateX(0) scale(0.7); opacity: 0; }
 
-        /* دکمه‌های کناری گالری */
         .nav-btn {
             position: absolute; top: 50%; transform: translateY(-50%);
-            width: 55px; height: 55px; background: var(--glass);
+            width: 45px; height: 45px; background: var(--glass);
             border: 1px solid var(--border); color: var(--neon-blue);
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
             cursor: pointer; z-index: 20; transition: 0.3s;
         }
-        .nav-btn:hover { background: var(--neon-blue); color: #000; box-shadow: 0 0 15px var(--neon-blue); }
-        .nav-btn.btn-prev { right: -20px; }
-        .nav-btn.btn-next { left: -20px; }
+        .nav-btn.btn-prev { right: 5px; } /* اصلاح موقعیت برای جلوگیری از لرزش */
+        .nav-btn.btn-next { left: 5px; }
 
-        /* فوتر ثابت */
         .footer {
             position: fixed; bottom: 0; left: 0; width: 100%;
             background: rgba(5, 5, 8, 0.96); backdrop-filter: blur(20px);
-            border-top: 1px solid #222; padding: 15px 30px;
+            border-top: 1px solid #222; padding: 12px 20px;
             display: flex; justify-content: space-between; align-items: center; z-index: 1000;
         }
 
         .btn-wa-footer {
-            background: #25D366; color: white; padding: 12px 25px; border-radius: 50px;
-            text-decoration: none; font-weight: bold; display: flex; align-items: center; gap: 10px;
-            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
+            background: #25D366; color: white; padding: 10px 18px; border-radius: 50px;
+            text-decoration: none; font-weight: bold; display: flex; align-items: center; gap: 8px;
+            font-size: 0.9rem;
         }
 
-        .call-area a { color: white; text-decoration: none; font-weight: 900; font-size: 1.3rem; }
+        .call-area a { color: white; text-decoration: none; font-weight: 900; font-size: 1.1rem; }
 
         @media (max-width: 600px) {
-            .slider-outer { max-width: 300px; height: 400px; }
-            .nav-btn { width: 45px; height: 45px; }
-            .nav-btn.btn-prev { right: -10px; }
-            .nav-btn.btn-next { left: -10px; }
+            .slider-outer { max-width: 290px; height: 380px; }
+            .moving-title { font-size: 2.2rem; }
+            .sub-copy { font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -199,8 +199,7 @@
     <header class="container">
         <h1 class="moving-title">لوگو پروژکتور</h1>
         <p class="sub-copy">
-            با تکنولوژی تابش هوشمند، برند خود را بر روی هر سطحی حک کنید. 
-            راهکاری نوین برای درخشش کسب‌وکارهای لوکس و مدرن.
+            درخشش برند شما بر روی هر سطحی. راهکاری نوین برای تبلیغات محیطی لوکس و تاثیرگذار.
         </p>
         
         <div class="hero-stage">
@@ -229,8 +228,8 @@
 
     <div class="footer">
         <a href="https://wa.me/989195703080?text=سلام، وقت بخیر. مشاوره می‌خواستم" class="btn-wa-footer">
-            <i class="fab fa-whatsapp" style="font-size: 1.6rem;"></i>
-            <span>مشاوره در واتساپ</span>
+            <i class="fab fa-whatsapp" style="font-size: 1.4rem;"></i>
+            <span>مشاوره واتساپ</span>
         </a>
         <div class="call-area">
             <a href="tel:09195703080">۰۹۱۹۵۷۰۳۰۸۰</a>
@@ -238,9 +237,8 @@
     </div>
 
     <script>
-        // دیتای محصولات
         const products = [
-            { id: 1, name: "لوگو پروژکتور ۱۲۰۰ وات فوق قدرتمند", price: "۱۴۴,۰۰۰,۰۰۰" },
+            { id: 1, name: "لوگو پروژکتور ۱۲۰۰ وات قدرتمند", price: "۱۴۴,۰۰۰,۰۰۰" },
             { id: 2, name: "لوگو پروژکتور ۳۰۰ وات اسلایدی", price: "۳۳,۹۰۰,۰۰۰" },
             { id: 3, name: "لوگو پروژکتور ۲۰۰ وات اسلایدی", price: "۲۹,۹۰۰,۰۰۰" },
             { id: 4, name: "لوگو پروژکتور ۳۰۰ وات چرخشی", price: "۲۹,۰۰۰,۰۰۰" },
@@ -256,12 +254,11 @@
             <div class="liquid-card">
                 <div class="p-img-box"><img src="images/p${p.id}.png" class="p-img"></div>
                 <h3 class="p-title">${p.name}</h3>
-                <div class="p-price">${p.price} <small style="font-size: 0.7rem; color: #666;">تومان</small></div>
+                <div class="p-price">${p.price} <small style="font-size: 0.6rem; color: #666;">تومان</small></div>
                 <a href="https://wa.me/989195703080?text=${waMsg}" class="btn-wa-item">مشاوره این مدل</a>
             </div>
         `}).join('');
 
-        // منطق گالری
         let currentIndex = 0;
         const slides = document.querySelectorAll('.slide');
         const slider = document.getElementById('slider');
@@ -279,26 +276,24 @@
         function moveNext() { currentIndex = (currentIndex + 1) % slides.length; updateSlider(); }
         function movePrev() { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateSlider(); }
 
-        // قابلیت درگ و سوایپ
         let startX = 0;
-        slider.addEventListener('touchstart', (e) => startX = e.touches[0].clientX);
+        slider.addEventListener('touchstart', (e) => startX = e.touches[0].clientX, {passive: true});
         slider.addEventListener('touchend', (e) => {
             let endX = e.changedTouches[0].clientX;
-            if (startX - endX > 50) moveNext();
-            if (endX - startX > 50) movePrev();
-        });
+            if (startX - endX > 40) moveNext();
+            if (endX - startX > 40) movePrev();
+        }, {passive: true});
 
         updateSlider();
 
-        // ایجاد ذرات طلا
         function createDust() {
-            for (let i = 0; i < 45; i++) {
+            for (let i = 0; i < 35; i++) {
                 let p = document.createElement('div');
                 p.className = 'particle';
-                let size = Math.random() * 3 + 1;
+                let size = Math.random() * 2 + 1;
                 p.style.width = size + 'px'; p.style.height = size + 'px';
-                p.style.left = Math.random() * 100 + 'vw';
-                p.style.animationDuration = (Math.random() * 8 + 5) + 's';
+                p.style.left = Math.random() * 98 + 'vw'; /* محدود کردن عرض ذرات */
+                p.style.animationDuration = (Math.random() * 8 + 6) + 's';
                 p.style.animationDelay = (Math.random() * 5) + 's';
                 document.body.appendChild(p);
             }
