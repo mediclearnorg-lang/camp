@@ -3,154 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فروشگاه لوگو پروژکتور | نسخه متالیک و نئون</title>
+    <title>ویترین لوکس لوگو پروژکتور</title>
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
             --bg: #050508;
+            --gold-light: #FFD700;
+            --gold-dark: #b8860b;
             --copper: #b87333;
-            --space-gray: #4a4a4a;
             --neon-blue: #00f3ff;
-            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-bg: rgba(0, 243, 255, 0.05);
             --glass-border: rgba(0, 243, 255, 0.3);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--bg);
             color: white;
-            font-family: 'Vazirmatn', sans-serif !important;
+            font-family: 'Vazirmatn', sans-serif;
             overflow-x: hidden;
             min-height: 100vh;
         }
 
-        /* پس‌زمینه با تم مسی و اسپیس‌گری */
+        /* پس‌زمینه با عمق نوری */
         .bg-gradient {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 10% 10%, rgba(184, 115, 51, 0.1) 0%, transparent 40%),
-                        radial-gradient(circle at 90% 90%, rgba(74, 74, 74, 0.2) 0%, transparent 40%),
+            background: radial-gradient(circle at 50% 20%, rgba(184, 115, 51, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(74, 74, 74, 0.2) 0%, transparent 50%),
                         #050508;
             z-index: -2;
         }
-        
-        /* ذرات ریز مسی و نقره‌ای */
-        .particle {
-            position: fixed; border-radius: 50%; opacity: 0; pointer-events: none;
+
+        /* ذرات معلق طلا */
+        .gold-particle {
+            position: fixed; background: linear-gradient(45deg, var(--gold-light), var(--copper));
+            border-radius: 50%; pointer-events: none; opacity: 0;
             animation: rise linear infinite; z-index: -1;
         }
         @keyframes rise {
-            0% { transform: translateY(105vh) scale(0); opacity: 0; }
-            50% { opacity: 0.5; }
-            100% { transform: translateY(-5vh) scale(1); opacity: 0; }
+            0% { transform: translateY(110vh) translateX(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) translateX(50px) rotate(360deg); opacity: 0; }
         }
 
-        .container { width: 92%; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; }
 
         header {
-            min-height: 70vh; display: flex; align-items: center; justify-content: center;
-            flex-direction: column; text-align: center; padding-top: 80px;
+            min-height: 50vh; display: flex; align-items: center; justify-content: center;
+            flex-direction: column; text-align: center; padding-top: 50px;
         }
 
-        .glitch-text {
-            font-size: clamp(2.5rem, 7vw, 5.5rem); font-weight: 900; line-height: 1.2;
-            background: linear-gradient(to bottom, #fff, var(--copper));
+        /* تایتل با گرادینت متحرک و چرخان */
+        .animated-title {
+            font-size: clamp(2.5rem, 8vw, 5.5rem); font-weight: 900;
+            background: linear-gradient(270deg, #fff, var(--gold-light), var(--copper), #fff);
+            background-size: 400% 400%;
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
+            animation: gradientMove 8s ease infinite;
+            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.2));
+        }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .product-stage {
-            position: relative; width: 280px; height: 280px; margin: 30px auto;
+            position: relative; width: 250px; height: 250px; margin: 20px auto;
             display: flex; justify-content: center; align-items: center;
         }
-        .product-stage::before {
-            content: ''; position: absolute; width: 110%; height: 110%; border-radius: 50%;
-            border: 2px dashed var(--neon-blue); animation: rotateBorder 10s linear infinite;
-            opacity: 0.3;
+        /* هاله نوری پشت محصول اصلی */
+        .glow-ring {
+            position: absolute; width: 100%; height: 100%;
+            border-radius: 50%; background: radial-gradient(circle, rgba(0, 243, 255, 0.15) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
         }
-        @keyframes rotateBorder { 100% { transform: rotate(360deg); } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.4); opacity: 0.2; } }
 
-        .hero-img {
-            width: 80%; z-index: 2; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8));
-            animation: float 6s ease-in-out infinite;
-        }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        .hero-img { width: 90%; z-index: 5; filter: drop-shadow(0 10px 30px #000); animation: float 6s infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-        /* باکس محصول با استایل شیشه‌ای آبی نئون */
+        /* باکس محصولات - نئون آبی */
         .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px; margin-bottom: 120px;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px; padding-bottom: 120px;
         }
 
-        .liquid-card {
-            background: rgba(0, 243, 255, 0.03);
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border);
-            border-radius: 25px; padding: 25px; text-align: center;
-            transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        .card {
+            background: var(--glass-bg); backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border); border-radius: 25px;
+            padding: 25px; text-align: center; transition: 0.4s;
             display: flex; flex-direction: column; justify-content: space-between;
         }
+        .card:hover { transform: translateY(-10px); border-color: var(--neon-blue); box-shadow: 0 0 25px rgba(0, 243, 255, 0.2); }
 
-        .liquid-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--neon-blue);
-            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.2);
-        }
+        .prod-img { max-width: 80%; height: 160px; object-fit: contain; margin: 0 auto 15px; filter: drop-shadow(0 5px 15px #000); }
+        .prod-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 10px; color: #eee; }
+        .prod-price { font-size: 1.7rem; font-weight: 900; color: var(--neon-blue); margin-bottom: 15px; }
 
-        .prod-img-box { height: 160px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; }
-        .prod-img { max-width: 90%; max-height: 100%; transition: 0.4s; }
-
-        .prod-title { font-size: 1.05rem; font-weight: 700; min-height: 3rem; color: #f0f0f0; }
-        .prod-price { color: var(--neon-blue); font-size: 1.6rem; font-weight: 900; margin: 10px 0; }
-
-        .btn-order {
+        /* دکمه آبی درخشان */
+        .btn-blue {
             display: block; width: 100%; padding: 12px;
-            background: transparent; color: var(--neon-blue); border: 1px solid var(--neon-blue);
+            background: transparent; color: var(--neon-blue); border: 2px solid var(--neon-blue);
             border-radius: 15px; font-weight: bold; text-decoration: none; transition: 0.3s;
+            text-shadow: 0 0 5px var(--neon-blue);
         }
-        .btn-order:hover { background: var(--neon-blue); color: #000; }
+        .btn-blue:hover { background: var(--neon-blue); color: #000; box-shadow: 0 0 20px var(--neon-blue); }
 
-        /* فوتر چسبنده برای موبایل و دسکتاپ */
-        .sticky-footer {
+        /* فوتر موبایل - ثابت */
+        .footer {
             position: fixed; bottom: 0; left: 0; width: 100%;
-            background: rgba(10, 10, 12, 0.95); backdrop-filter: blur(15px);
-            border-top: 1px solid var(--space-gray); padding: 12px 20px;
-            display: flex; justify-content: space-between; align-items: center; z-index: 999;
+            background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(15px);
+            border-top: 1px solid #333; padding: 15px 25px;
+            display: flex; justify-content: space-between; align-items: center; z-index: 1000;
         }
 
-        .footer-right { text-align: right; }
-        .footer-right a { color: #fff; text-decoration: none; font-weight: 900; font-size: 1.2rem; }
-        
-        .btn-wa-footer {
+        .btn-whatsapp-footer {
             background: #25D366; color: white; padding: 10px 20px; border-radius: 50px;
             text-decoration: none; font-weight: bold; display: flex; align-items: center; gap: 8px;
+            box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
         }
 
-        @media (max-width: 480px) {
-            .btn-wa-footer span { display: none; }
-            .btn-wa-footer { padding: 12px; }
-        }
+        .call-info { text-align: right; }
+        .call-info a { color: white; text-decoration: none; font-weight: 900; font-size: 1.2rem; }
+
+        @media (max-width: 480px) { .btn-whatsapp-footer span { display: none; } }
     </style>
 </head>
 <body>
 
     <div class="bg-gradient"></div>
-    
+
     <header class="container">
-        <h1 class="glitch-text">لوگو پروژکتورهای<br>سری لاکچری</h1>
+        <h1 class="animated-title">لوگو پروژکتور</h1>
         <div class="product-stage">
-            <img src="images/p1.png" alt="محصول اصلی" class="hero-img">
+            <div class="glow-ring"></div>
+            <img src="images/p1.png" class="hero-img" alt="Luxury Projector">
         </div>
     </header>
 
-    <section id="products" class="container">
-        <div class="products-grid">
+    <section class="container">
+        <div class="products-grid" id="grid">
             <script>
-                const data = [
+                const products = [
                     { id: 1, name: "لوگو پروژکتور 1200W قدرتمند", price: "144,000,000" },
                     { id: 2, name: "لوگو پروژکتور 300W اسلایدی", price: "33,900,000" },
                     { id: 3, name: "لوگو پروژکتور 200W اسلایدی", price: "29,900,000" },
@@ -161,50 +161,48 @@
                     { id: 8, name: "لوگو پروژکتور 70W چرخشی", price: "14,900,000" }
                 ];
 
-                document.write(data.map(p => {
-                    const msg = encodeURIComponent(`سلام، برای خرید "${p.name}" نیاز به مشاوره دارم.`);
-                    return `
-                    <div class="liquid-card">
-                        <div class="prod-img-box"><img src="images/p${p.id}.png" class="prod-img"></div>
+                document.getElementById('grid').innerHTML = products.map(p => `
+                    <div class="card">
+                        <img src="images/p${p.id}.png" class="prod-img">
                         <h3 class="prod-title">${p.name}</h3>
-                        <div class="prod-price">${p.price} <small style="font-size:0.7rem">تومان</small></div>
-                        <a href="https://wa.me/989195703080?text=${msg}" class="btn-order">
-                            <i class="fab fa-whatsapp"></i> مشاوره خرید این مدل
+                        <div class="prod-price">${p.price} <small style="font-size: 0.7rem;">تومان</small></div>
+                        <a href="https://wa.me/989195703080?text=${encodeURIComponent('سلام، من در مورد مدل ' + p.name + ' سوال داشتم.')}" class="btn-blue">
+                            مشاوره در واتساپ
                         </a>
                     </div>
-                `}).join(''));
+                `).join('');
             </script>
         </div>
     </section>
 
-    <div class="sticky-footer">
-        <a href="https://wa.me/989195703080?text=${encodeURIComponent('سلام، در مورد لوگو پروژکتور مشاوره می‌خواستم.')}" class="btn-wa-footer">
-            <i class="fab fa-whatsapp" style="font-size: 1.4rem;"></i>
+    <div class="footer">
+        <a href="https://wa.me/989195703080?text=سلام، در مورد لوگو پروژکتور مشاوره می‌خواستم" class="btn-whatsapp-footer">
+            <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i>
             <span>مشاوره در واتساپ</span>
         </a>
-        <div class="footer-right">
+        <div class="call-info">
             <span style="font-size: 0.7rem; color: #888;">شماره تماس:</span><br>
             <a href="tel:09195703080">۰۹۱۹۵۷۰۳۰۸۰</a>
         </div>
     </div>
 
     <script>
-        function createParticles() {
-            const body = document.body;
-            const colors = ['#b87333', '#4a4a4a', '#00f3ff', '#ffffff'];
+        // ایجاد ذرات طلا
+        function initGold() {
             for (let i = 0; i < 50; i++) {
                 let p = document.createElement('div');
-                p.classList.add('particle');
-                let size = Math.random() * 2.5 + 0.5;
-                p.style.width = size + 'px'; p.style.height = size + 'px';
+                p.className = 'gold-particle';
+                let size = Math.random() * 4 + 1;
+                p.style.width = size + 'px';
+                p.style.height = size + 'px';
                 p.style.left = Math.random() * 100 + 'vw';
-                p.style.animationDuration = (Math.random() * 8 + 4) + 's';
-                p.style.background = colors[Math.floor(Math.random() * 4)];
-                p.style.boxShadow = `0 0 5px ${p.style.background}`;
-                body.appendChild(p);
+                p.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                p.style.animationDelay = (Math.random() * 5) + 's';
+                document.body.appendChild(p);
             }
         }
-        createParticles();
+        initGold();
     </script>
+
 </body>
 </html>
